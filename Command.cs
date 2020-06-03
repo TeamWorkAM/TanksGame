@@ -2,7 +2,7 @@
 
 class CommandException : Exception
 {
-    public CommandException() : base("Ошибка выполнения команды!") { }
+    public CommandException() : base("Ошибка выполнения команды") { }
 }
 
 namespace Tanks.Engine
