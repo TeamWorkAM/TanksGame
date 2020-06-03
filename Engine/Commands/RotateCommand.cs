@@ -2,7 +2,7 @@
 
 namespace Tanks.Engine.Commands
 {
-    public class Rotate : Command
+    public class RotateCommand : Command
     {
         Rotatable entity;
 
