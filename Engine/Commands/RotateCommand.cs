@@ -6,7 +6,7 @@ namespace Tanks.Engine.Commands
     {
         Rotatable entity;
 
-        public Rotate(Rotatable rotatable)
+        public RotateCommand(Rotatable rotatable)
         {
             entity = rotatable;
         }
