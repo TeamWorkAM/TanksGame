@@ -1,6 +1,4 @@
 ﻿using Tanks.Engine.EntityProp;
-using System;
-using Tanks.Engine.Tanks.Engine;
 
 namespace Tanks.Engine.Commands
 {
@@ -10,16 +8,27 @@ namespace Tanks.Engine.Commands
 
         public MoveCommand(Movable movable)
         {
-            Entity = movable;
+            if (movable != null)
+            {
+                Entity = movable;
+            }
+            else
+                throw new CommandException("Объект не загружен");
         }
         public void Action()
         {
-            if (Entity != null)
+            try
             {
                 Entity.Position = Entity.Position + Entity.Velocity;
             }
-            else
-                throw new CommandException();
+            catch(ReadObjectException)
+            {
+                throw new CommandException("Комaнда не выполнена: не удалось получить данные");
+            }
+            catch(WriteObjectException)
+            {
+                throw new CommandException("Команда не выполнена: не удалось записать данные");
+            
         }
     }
 }

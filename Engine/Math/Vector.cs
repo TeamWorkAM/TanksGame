@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tanks.Engine.Math
 {
     public class Vector
     {
-        public double[] Data;
+        public double[] Data { get; set; }
         public Vector()
         {
-
+            //в перегрузке оператора + создаётся объект result типа veсtor, т.к данных в нём нет изначально, необходим конструктор, чтобы инициализировать этот вектор
         }
         public Vector(double[] data)
         {
