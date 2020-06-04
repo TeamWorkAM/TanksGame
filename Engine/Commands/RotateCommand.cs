@@ -2,28 +2,32 @@
 
 namespace Tanks.Engine.Commands
 {
-    public class RotateCommand : Command
+    public class Rotate : Command
     {
         Rotatable entity;
 
-        public RotateCommand(Rotatable rotatable)
+        public Rotate(Rotatable rotatable)
         {
-            entity = rotatable;
+            if (rotatable != null)
+            {
+                entity = rotatable;
+            }
+            else throw new CommandException("Объект не загружен");
         }
 
         public void Action()
         {
             try
             {
-                if (entity != null)
-                {
-                    entity.Angle += entity.Velocity;
-                }
-                else throw new CommandException();
+                entity.Angle += entity.Velocity;                             
             }
-            catch
+            catch(ReadObjectException)
             {
-                
+                throw new CommandException("Команада не выполнена: не удалось получить данные");
+            }
+            catch(WriteObjectException)
+            {
+                throw new CommandException("Команада не выполнена: не удалось записать данные");
             }
         }
     }

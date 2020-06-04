@@ -3,6 +3,6 @@
     public interface Rotatable
     {
         double Angle { get; set; }
-        double Velocity { get; set; }
+        double Velocity { get; }
     }
 }

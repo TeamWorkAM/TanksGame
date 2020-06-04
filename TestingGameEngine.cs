@@ -1,17 +1,9 @@
 ﻿using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Tanks.Engine;
 using Tanks.Engine.EntityProp;
 using Tanks.Engine.Commands;
 using System;
-
-class ReadObjectException : Exception
-{
-    public ReadObjectException() : base("Ошибка чтения данных объекта") { }
-}
-class WriteObjectException : Exception
-{
-    public WriteObjectException() : base("Ошибка записи данных в объект") { }
-}
 
 namespace TanksUnitTest
 {
@@ -44,20 +36,26 @@ namespace TanksUnitTest
 
             tank.Verify();
         }
-
-        /*не понятно*/
         [TestMethod]
-        public void test_Tank_Couldnt_write_data()
+        public void test_Tank_Couldnt_read_angle()
+        {
+            var tank = new Mock<Rotatable>();
+            tank.Setup(a => a.Angle).Throws<ReadObjectException>().Verifiable();
+            tank.Setup(a => a.Velocity).Returns(5).Verifiable();
+
+            Rotate cmd = new Rotate(tank.Object);
+            cmd.Action();
+        }
+        [TestMethod]
+        public void test_Tank_Couldnt_write_angle()
         {
             var tank = new Mock<Rotatable>();
             tank.Setup(a => a.Angle).Returns(3).Verifiable();
             tank.Setup(a => a.Velocity).Returns(5).Verifiable();
-            tank.SetupSet(a => a.Angle = ).Throws<WriteObjectException>().;
+            tank.SetupSet(a => a.Angle = 8).Throws<WriteObjectException>().Verifiable();
 
             Rotate cmd = new Rotate(tank.Object);
             cmd.Action();
-
-            tank.Verify();
         }
     }
 }
