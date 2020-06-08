@@ -25,16 +25,26 @@ namespace TestingGameEngine
         [TestMethod]
         public void TestVectorClassAllGood()
         {
-            var vector1 = new Mock<Vector>();
-            vector1.Setup(a => a.Data).Returns(new double[] { 2, 4 }).Verifiable();
-            var vector2 = new Mock<Vector>();
-            vector2.Setup(a => a.Data).Returns(new double[] { 2, 5 }).Verifiable();
+            Vector vec1 = new Vector(new double[] { 5, 34 });
+            Vector vec2 = new Vector(new double[] { 15, 5 });
 
-            var result = new Mock<Vector>();
-            /*
-            result = vector1 + vector2;
-            result.SetupSet(a => a.Data = new double[] { 4, 9 }).Verifiable;
-            */
+            Vector result = new Vector(new double[] { 0, 0 });
+            result = vec1 + vec2;
+
+            Assert.AreEqual(20, result.Data[0]);
+            Assert.AreEqual(39, result.Data[1]);
+        }
+        [TestMethod]
+        public void TestVectorClassBad()
+        {
+            Vector vec1 = new Vector(new double[] { 5, 34 });
+            Vector vec2 = new Vector(new double[] { 15, 5, 6 });
+
+            Vector result = new Vector(new double[] { 0, 0 });
+            result = vec1 + vec2;
+
+            Assert.AreEqual(20, result.Data[0]);
+            Assert.AreEqual(39, result.Data[1]);
         }
         [TestMethod]
         public void CantRead()

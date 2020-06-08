@@ -21,14 +21,14 @@ namespace Tanks.Engine.Commands
             {
                 Entity.Position = Entity.Position + Entity.Velocity;
             }
-            catch(ReadObjectException)
+            catch (ReadObjectException)
             {
                 throw new CommandException("Комaнда не выполнена: не удалось получить данные");
             }
-            catch(WriteObjectException)
+            catch (WriteObjectException)
             {
                 throw new CommandException("Команда не выполнена: не удалось записать данные");
-            
+            }
         }
     }
 }
